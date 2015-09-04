@@ -26,10 +26,10 @@ class Program {
 
         CardInfo card = new CardInfo();
         card.cardType = 10;
-        // "cardId":"34 CA 56 61 BE 4D 66 ",
+        card.cardId = "1111-2222-3333-4455";
         card.cardNum = "12345678800";
-        card.dateStart = 1440610120;
-        card.dateEnd = 1441610120;
+        card.dateStart = 0;
+        card.dateEnd = 0;
 
         TicketInfo ticket = new TicketInfo();
         ticket.cardType = 0;
@@ -63,10 +63,15 @@ class Program {
             Console.WriteLine("cmd ID: " + jsonDe.cmdID);
             Console.WriteLine("params: " + JsonConvert.SerializeObject(jsonDe.parameters));
 
-            if (jsonDe.cmd == "activate-ticket") {
-                ticket.dateStart = 1440578851;
-                ticket.dateEnd = 1440878851;
+            if (jsonDe.cmd == "activate-ticket" && card.cardType != 10) {
+                ticket.dateStart = jsonDe.parameters.start;
+                ticket.dateEnd = jsonDe.parameters.end;
                 send2ui("cmdSuccess", ticket);
+            }
+            else if (jsonDe.cmd == "activate-ticket" && card.cardType == 10) { // ESEK activation
+                card.dateStart = jsonDe.parameters.start;
+                card.dateEnd = jsonDe.parameters.end;
+                send2ui("cmdSuccess", card);
             }
         });
 
@@ -137,6 +142,7 @@ class Program {
 }
 
 class CardInfo {
+    public string cardId { get; set; }
     public int cardType { get; set; }
     public string cardNum { get; set; }
     public int dateStart { get; set; }
