@@ -26,10 +26,10 @@ class Program {
 
         CardInfo card = new CardInfo();
         card.cardType = 10;
-        card.cardId = "1111-2222-3333-4455";
-        card.cardNum = "12345678800";
-        card.dateStart = 0;
-        card.dateEnd = 0;
+        card.cardId = "34b2e5b9ce0c66";
+        card.cardNum = "2190086916";
+        card.dateStart = 0; // 1440578851;
+        card.dateEnd = 0; // 1440978851;
 
         TicketInfo ticket = new TicketInfo();
         ticket.cardType = 0;
