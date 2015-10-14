@@ -32,7 +32,7 @@ class Program {
         card.dateEnd = 0; // 1440978851;
 
         TicketInfo ticket = new TicketInfo();
-        ticket.cardType = 0;
+        ticket.cardType = 1;
         ticket.cardId = "1111-2222-3333-4440";
         ticket.cardNum = "12345670";
         ticket.dateStart = 1;// 1440578851;
@@ -41,7 +41,7 @@ class Program {
 
         // Month ticket full priced
         TicketInfo monthTicket = new TicketInfo();
-        monthTicket.cardType = 1;
+        monthTicket.cardType = 2;
         monthTicket.cardId = "1111-2222-3333-4441";
         monthTicket.cardNum = "12345671";
         monthTicket.dateStart = 1;// 1440578851;
@@ -49,7 +49,7 @@ class Program {
 
         // Month ticket for pensioner
         TicketInfo monthTicketPension = new TicketInfo();
-        monthTicketPension.cardType = 2;
+        monthTicketPension.cardType = 3;
         monthTicketPension.cardId = "1111-2222-3333-4442";
         monthTicketPension.cardNum = "12345672";
         monthTicketPension.dateStart = 1;// 1440578851;
