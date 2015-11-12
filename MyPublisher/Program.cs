@@ -24,6 +24,8 @@ class Program {
         System.Console.WriteLine("Press M to simulate month pensioner ticket eject");
         System.Console.WriteLine("Press Escape to exit");
 
+        Object inserted = null;
+
         CardInfo card = new CardInfo();
         card.cardType = 10;
         card.cardId = "34b2e5b9ce0c66";
@@ -63,12 +65,12 @@ class Program {
             Console.WriteLine("cmd ID: " + jsonDe.cmdID);
             Console.WriteLine("params: " + JsonConvert.SerializeObject(jsonDe.parameters));
 
-            if (jsonDe.cmd == "activate-ticket" && card.cardType != 10) {
+            if (jsonDe.cmd == "activate-ticket" && inserted == ticket) {
                 ticket.dateStart = jsonDe.parameters.start;
                 ticket.dateEnd = jsonDe.parameters.end;
                 send2ui("cmdSuccess", ticket);
             }
-            else if (jsonDe.cmd == "activate-ticket" && card.cardType == 10) { // ESEK activation
+            else if (jsonDe.cmd == "activate-ticket" && inserted == card) { // ESEK activation
                 card.dateStart = jsonDe.parameters.start;
                 card.dateEnd = jsonDe.parameters.end;
                 send2ui("cmdSuccess", card);
@@ -84,27 +86,35 @@ class Program {
                 break;
             }
             else if (cki.Key == ConsoleKey.I) {
+                inserted = card;
                 informCardInsert(card);
             }
             else if (cki.Key == ConsoleKey.O) {
+                inserted = null;
                 informCardEject(card);
             }
             else if (cki.Key == ConsoleKey.J) {
+                inserted = ticket;
                 informCardInsert(ticket);
             }
             else if (cki.Key == ConsoleKey.K) {
+                inserted = null;
                 informCardEject(ticket);
             }
             else if (cki.Key == ConsoleKey.A) {
+                inserted = monthTicket;
                 informCardInsert(monthTicket);
             }
             else if (cki.Key == ConsoleKey.S) {
+                inserted = null;
                 informCardEject(monthTicket);
             }
             else if (cki.Key == ConsoleKey.N) {
+                inserted = monthTicketPension;
                 informCardInsert(monthTicketPension);
             }
             else if (cki.Key == ConsoleKey.M) {
+                inserted = null;
                 informCardEject(monthTicketPension);
             }
         }
