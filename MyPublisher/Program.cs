@@ -24,7 +24,7 @@ class Program {
         System.Console.WriteLine("Press M to simulate month pensioner ticket eject");
         System.Console.WriteLine("Press Escape to exit");
 
-        Object inserted = null;
+        InfoBase inserted = null;
 
         CardInfo card = new CardInfo();
         card.cardType = 10;
@@ -65,15 +65,10 @@ class Program {
             Console.WriteLine("cmd ID: " + jsonDe.cmdID);
             Console.WriteLine("params: " + JsonConvert.SerializeObject(jsonDe.parameters));
 
-            if (jsonDe.cmd == "activate-ticket" && inserted == ticket) {
-                ticket.dateStart = jsonDe.parameters.start;
-                ticket.dateEnd = jsonDe.parameters.end;
-                send2ui("cmdSuccess", ticket);
-            }
-            else if (jsonDe.cmd == "activate-ticket" && inserted == card) { // ESEK activation
-                card.dateStart = jsonDe.parameters.start;
-                card.dateEnd = jsonDe.parameters.end;
-                send2ui("cmdSuccess", card);
+            if (jsonDe.cmd == "activate-ticket") {
+                inserted.dateStart = jsonDe.parameters.start;
+                inserted.dateEnd = jsonDe.parameters.end;
+                send2ui("cmdSuccess", inserted);
             }
         });
 
@@ -151,7 +146,7 @@ class Program {
 
 }
 
-class CardInfo {
+class InfoBase {
     public string cardId { get; set; }
     public int cardType { get; set; }
     public string cardNum { get; set; }
@@ -159,12 +154,10 @@ class CardInfo {
     public int dateEnd { get; set; }
 }
 
-class TicketInfo {
-    public int cardType { get; set; }
-    public string cardNum { get; set; }
-    public string cardId { get; set; }
-    public int dateStart { get; set; }
-    public int dateEnd { get; set; }
+class CardInfo : InfoBase {
+}
+
+class TicketInfo : InfoBase {
     public int tripsLeft { get; set; }
 }
 
