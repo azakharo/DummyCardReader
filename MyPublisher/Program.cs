@@ -27,7 +27,7 @@ class Program {
         InfoBase inserted = null;
 
         CardInfo card = new CardInfo();
-        card.cardType = 10;
+        card.cardType = 0;
         card.cardId = "34b2e5b9ce0c66";
         card.cardNum = "2190086916";
         card.dateStart = 0; // 1440578851;
